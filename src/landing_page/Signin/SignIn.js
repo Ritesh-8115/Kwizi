@@ -1,7 +1,7 @@
-import { SignUp } from '@clerk/clerk-react';
+import { SignIn } from '@clerk/clerk-react';
 import React from 'react'
 
-function SigningUp(){
+function SigningIn() {
   return (
     <div style={{
       display: "flex",
@@ -9,9 +9,9 @@ function SigningUp(){
       alignItems: "center",
       height: "70vh",
     }}>
-      <SignUp />
+      <SignIn />
     </div>
   )
 }
 
-export default SigningUp;
+export default SigningIn;
