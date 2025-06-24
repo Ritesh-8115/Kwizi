@@ -15,7 +15,7 @@ function Navbar() {
     {
       name: "My Stats",
       icon: <i class="fa-solid fa-chart-simple"></i>,
-      link: "/stats",
+      link: "/mystats",
     },
   ];
   return (
@@ -70,7 +70,7 @@ function Navbar() {
                   : { color: "#60a8eb" }
               }
               class="nav-link ml-50"
-              href="/stats"
+              href="/mystats"
             >
               <i class="fa-solid fa-chart-simple"></i> MY STATS
             </a>

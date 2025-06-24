@@ -6,7 +6,7 @@ import CategoryStats from './categoryStats';
 function OverallMystats() {
     return ( 
       <>
-           <div>Mystats page</div>
+           
            <Logo/> 
            <Overview/>
            <GraphPage/>
