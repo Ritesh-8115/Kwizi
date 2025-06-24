@@ -6,18 +6,6 @@ import { useLocation } from "react-router-dom";
 function Navbar() {
   const location = useLocation();
   const pathName = location.pathname;
-  const menu = [
-    {
-      name: "Home",
-      icon: <i class="fa-solid fa-house "></i>,
-      link: "/",
-    },
-    {
-      name: "My Stats",
-      icon: <i class="fa-solid fa-chart-simple"></i>,
-      link: "/mystats",
-    },
-  ];
   return (
     <nav
       class="navbar navbar-expand-lg  border-bottom "
@@ -70,7 +58,7 @@ function Navbar() {
                   : { color: "#60a8eb" }
               }
               class="nav-link ml-50"
-              href="/mystats"
+              href="/stats"
             >
               <i class="fa-solid fa-chart-simple"></i> MY STATS
             </a>
