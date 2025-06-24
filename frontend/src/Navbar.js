@@ -48,7 +48,7 @@ function Navbar() {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a
               style={
-                pathName === "/stats"
+                pathName === "/mystats"
                   ? {
                       color: "#60a8eb",
                       border: "solid #60a8eb 2px",
@@ -58,7 +58,7 @@ function Navbar() {
                   : { color: "#60a8eb" }
               }
               class="nav-link ml-50"
-              href="/stats"
+              href="/mystats"
             >
               <i class="fa-solid fa-chart-simple"></i> MY STATS
             </a>
