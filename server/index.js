@@ -1,18 +1,30 @@
-const express = require("express");
-const cors = require("cors");
+import dotenv from "dotenv";
+import express from "express"
+import cors from "cors"
+import mongoose from "mongoose";
+import userStatsRoutes from "./routes/userStats.js";
+import userRoutes from "./routes/user.js";
+import categoryRoutes from "./routes/categories.js";
+import clerkWebhook from "./routes/clerkWebhook.js";
 
-const userRoutes = require("./routes/user");
-const categoryRoutes = require("./routes/categories");
+dotenv.config();
+
 
 const app = express();
-const PORT = 5000;
-
 app.use(cors());
 app.use(express.json());
 
+// MongoDB connection
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => console.log("MongoDB connected"))
+  .catch((error) => console.log(error));
+
+
 app.use("/api/user", userRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api", userStatsRoutes);
+app.use("/api", clerkWebhook);
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(5000, () => console.log("Server running on http://localhost:5000"));
+

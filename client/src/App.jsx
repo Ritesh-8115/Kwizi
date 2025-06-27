@@ -11,12 +11,14 @@ import TermsOfService from "./landing_page/Footer/TermsOfService";
 import NotFound from "./notfound/NotFound";
 import MyStats from "./landing_page/Mystats/OverallMystats";
 import { GlobalContextProvider } from "./context/globalContext";
+import InitUserStats from "./hooks/InitUserStats";
 
 function App() {
   return (
     <>
     <GlobalContextProvider>
       <Navbar />
+      <InitUserStats /> 
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/mystats" element={<MyStats />} />

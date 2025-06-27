@@ -7,13 +7,14 @@ import {
   faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@/components/ui/button";
-import { UserButton, SignedIn, SignedOut } from "@clerk/clerk-react";
+import { UserButton, SignedIn, SignedOut} from "@clerk/clerk-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const location = useLocation();
   const pathName = location.pathname;
   const navigate = useNavigate();
+  
   return (
     <header
       className="min-h-[8vh] px-[10rem] xl:px-[15rem] flex items-center"
@@ -21,7 +22,7 @@ function Navbar() {
     >
       <nav className="flex-1 flex items-center justify-between">
         <a
-          class="flex items-center gap-2"
+          className="flex items-center gap-2"
           href="/"
           style={{ color: "#60a8eb", textAlign: "center" }}
         >
@@ -60,6 +61,7 @@ function Navbar() {
         <div>
           <SignedIn>
             <UserButton />
+            
           </SignedIn>
           <SignedOut>
             <Button
