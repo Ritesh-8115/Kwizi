@@ -18,10 +18,10 @@ import axios from "axios";
 
 function UserStats() {
   const { user, isLoaded } = useUser();
-  const [ userStats ,setUserStats] = useState(null);
+  const [userStats, setUserStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  // console.log("user.id", user?.id); 
-  
+  // console.log("user.id", user?.id);
+
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -38,15 +38,14 @@ function UserStats() {
 
     if (isLoaded && user) fetchStats();
   }, [isLoaded, user]);
-  
+
   if (isLoaded && !user) {
-  return (
-    <div className="flex justify-center items-center h-[60vh] text-xl text-red-500 font-semibold">
-      Please login to view your stats.
-    </div>
-  );
-}
-  if (loading || !userStats) return <Loader />;
+    return (
+      <div className="flex justify-center items-center h-[60vh] text-xl text-red-500 font-semibold">
+        Please login to view your stats.
+      </div>
+    );
+  }
 
   const recentAttemptDate = userStats?.categoryStats.reduce((acc, curr) => {
     const currentDate = new Date(curr.lastAttempt);
@@ -68,7 +67,6 @@ function UserStats() {
     .sort((a, b) => new Date(b.lastAttempt) - new Date(a.lastAttempt));
 
   return (
-
     <div className="flex flex-col gap-4">
       <div className="w-[63%] h-1/2 ml-[20%] mb-[1%] mt-[1%] p-[10px] rounded-[8px] shadow-md">
         <img
@@ -95,7 +93,7 @@ function UserStats() {
 
         <div className="py-4 px-4 mb-2 flex gap-2 border-1 rounded-lg shadow">
           <div className="text-xl font-bold text-black-400 ">
-            {<FontAwesomeIcon icon={faCrosshairs} />} Total Attempts: 
+            {<FontAwesomeIcon icon={faCrosshairs} />} Total Attempts:
           </div>
           <p className="font-bold text-2xl">{totalAttempts}</p>
         </div>
