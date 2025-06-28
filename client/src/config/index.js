@@ -1,48 +1,52 @@
-const ICategory =  {
-  id: string,
-  name: string,
-  description: string,
-  image: string,
-  quizzes: IQuiz[],
-}
+/**
+ * @typedef {Object} IOption
+ * @property {string} id
+ * @property {string} text
+ * @property {boolean} isCorrect
+ */
 
-const IQuiz = {
-  id: string,
-  title: string,
-  description?: string | null,
-  image?: string | null,
-  categoryId: string,
-  questions: IQuestion[],
-}
+/**
+ * @typedef {Object} IQuestion
+ * @property {string} id
+ * @property {string} text
+ * @property {string} [difficulty]
+ * @property {IOption[]} options
+ */
 
-const IQuestion = {
-  id: string,
-  text: string,
-  difficulty?: string | null,
-  options: IOption[],
-}
+/**
+ * @typedef {Object} IQuiz
+ * @property {string} id
+ * @property {string} title
+ * @property {string} [description]
+ * @property {string} [image]
+ * @property {string} categoryId
+ * @property {IQuestion[]} questions
+ */
 
-const IResponse = {
-  questionId: string,
-  optionId: string,
-  isCorrect: boolean,
-}
+/**
+ * @typedef {Object} ICategory
+ * @property {string} id
+ * @property {string} name
+ * @property {string} description
+ * @property {string} image
+ * @property {IQuiz[]} quizzes
+ */
 
-const IOption = {
-  id: string,
-  text: string,
-  isCorrect: boolean,
-}
+/**
+ * @typedef {Object} IResponse
+ * @property {string} questionId
+ * @property {string} optionId
+ * @property {boolean} isCorrect
+ */
 
-const ICategoryStats = {
-  attempts: number,
-  averageScore: number | null,
-  categoryId: string,
-  completed: number,
-  id: string,
-  lastAttempt: Date,
-  userId: string,
-  category: ICategory,
-}
-
-export default { ICategory, IQuiz, IQuestion, IOption, IResponse, ICategoryStats };
+/**
+ * @typedef {Object} ICategoryStats
+ * @property {number} attempts
+ * @property {number | null} averageScore
+ * @property {string} categoryId
+ * @property {number} completed
+ * @property {string} id
+ * @property {Date} lastAttempt
+ * @property {string} userId
+ * @property {ICategory} category
+ */

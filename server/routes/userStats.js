@@ -1,9 +1,8 @@
 import express from "express";
-import UserStats from "../models/UserStats.js"; // must include `.js`
+import UserStats from "../models/UserStats.js"; 
 
 const router = express.Router();
 
-// GET user stats by userId
 router.get("/user/:userId/stats", async (req, res) => {
   try {
     const stats = await UserStats.findOne({ userId: req.params.userId });

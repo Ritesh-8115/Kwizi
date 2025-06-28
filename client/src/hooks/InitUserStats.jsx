@@ -10,6 +10,7 @@ function InitUserStats() {
       try {
         await axios.post("http://localhost:5000/api/user/register", {
           userId: user.id,
+          name: user.fullName,
           email: user.primaryEmailAddress.emailAddress,
         });
       } catch (err) {

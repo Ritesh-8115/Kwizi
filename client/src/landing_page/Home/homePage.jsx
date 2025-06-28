@@ -1,7 +1,6 @@
 import React from "react";
 import { useGlobalContext } from "../../context/globalContext";
 import { useNavigate } from "react-router-dom";
-
 function homePage() {
   const { categories, loading } = useGlobalContext();
   const navigate = useNavigate();

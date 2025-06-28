@@ -1,4 +1,4 @@
-// routes/clerkWebhook.js
+
 import express from "express";
 import User from "../models/User.js";
 
@@ -8,7 +8,6 @@ router.post("/clerk-webhook", async (req, res) => {
   try {
     const event = req.body;
 
-    // Optional: Verify webhook signature here
 
     if (event.type === "user.created") {
       const { id, email_addresses, first_name, last_name } = event.data;

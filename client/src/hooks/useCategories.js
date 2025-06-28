@@ -10,6 +10,7 @@ const useCategories = () => {
       try {
         const res = await axios.get("http://localhost:5000/api/categories");
         setCategories(res.data);
+        return res.data;
       } catch (err) {
         console.error("Error fetching categories", err);
       } finally {

@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import useCategories from "../hooks/useCategories";
 import axios from "axios";
+import { useUser } from "@clerk/clerk-react";
 
 const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
   const { loading, categories } = useCategories();
+  const { user, isLoaded} = useUser();
 
   const [quizSetup, setQuizSetup] = useState({
     questionCount: 1,
@@ -19,16 +21,20 @@ export const GlobalContextProvider = ({ children }) => {
 
   useEffect(() => {
     const registerUser = async () => {
+      if (!isLoaded || !user) return;
       try {
-        await axios.post("http://localhost:5000/api/user/register");
-        // console.log("User registered");
+        await axios.post("http://localhost:5000/api/user/register", {
+          userId: user.id,
+          name: user.fullName,
+          email: user.primaryEmailAddress.emailAddress,
+        });
       } catch (err) {
         console.error("Registration failed", err);
       }
     };
 
     registerUser();
-  }, []);
+  }, [[isLoaded, user]]);
 
   return (
     <GlobalContext.Provider

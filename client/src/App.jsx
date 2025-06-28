@@ -12,8 +12,13 @@ import NotFound from "./notfound/NotFound";
 import MyStats from "./landing_page/Mystats/OverallMystats";
 import { GlobalContextProvider } from "./context/globalContext";
 import InitUserStats from "./hooks/InitUserStats";
-
+import QuizPage from "./landing_page/Quiz/QuizPage";
+import QuizSetupPage from "./landing_page/Quiz/QuizSetup";
+import CategoryPage from "./landing_page/Quiz/CategoryPage";
+import useRegisterUser from "./hooks/useRegisterUser";
 function App() {
+
+  useRegisterUser()
   return (
     <>
     <GlobalContextProvider>
@@ -24,6 +29,9 @@ function App() {
         <Route path="/mystats" element={<MyStats />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/categories/:categoryId" element={<CategoryPage />} />
+        <Route path="/quiz/setup" element={<QuizSetupPage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/privacyPolicy" element={<PrivacyPolicy />} />

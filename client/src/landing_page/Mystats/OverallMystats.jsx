@@ -46,6 +46,7 @@ function UserStats() {
       </div>
     );
   }
+  // if (loading || !userStats) return <Loader />;
 
   const recentAttemptDate = userStats?.categoryStats.reduce((acc, curr) => {
     const currentDate = new Date(curr.lastAttempt);

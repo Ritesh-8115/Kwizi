@@ -4,11 +4,16 @@ import cors from "cors"
 import mongoose from "mongoose";
 import userStatsRoutes from "./routes/userStats.js";
 import userRoutes from "./routes/user.js";
-import categoryRoutes from "./routes/categories.js";
+import categoriesRoutes from "./routes/categories.js";
 import clerkWebhook from "./routes/clerkWebhook.js";
+import apiRoutes from "./routes/api.js";
+import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
+import protectedRoutes from "./routes/protected.js";
+import quizRoutes from "./routes/quiz.js";
 
 dotenv.config();
 
+const PORT = 5000;
 
 const app = express();
 app.use(cors());
@@ -22,9 +27,14 @@ mongoose
 
 
 app.use("/api/user", userRoutes);
-app.use("/api/categories", categoryRoutes);
+app.use("/api", apiRoutes);
+app.use("/api/categories", categoriesRoutes);
+app.use("/api/categories", quizRoutes);
 app.use("/api", userStatsRoutes);
 app.use("/api", clerkWebhook);
+app.use(ClerkExpressWithAuth());
+app.use("/api", protectedRoutes);
 
-app.listen(5000, () => console.log("Server running on http://localhost:5000"));
+
+app.listen(5000, () => console.log(`Server is now running on port ${PORT}`));
 

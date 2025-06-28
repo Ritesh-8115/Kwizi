@@ -1,27 +1,24 @@
-
 import express from "express";
-import UserStats from "../models/UserStats.js";
-
+import User from "../models/User.js";
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-  const { userId, email } = req.body;
+  const { userId, name, email } = req.body;
 
   try {
-    // Check if user stats already exist
-    const existing = await UserStats.findOne({ userId });
-    if (existing) return res.status(200).json(existing);
+    const existingUser = await User.findOne({ userId });
+    if (existingUser) return res.status(200).json(existingUser);
 
-    const newStats = new UserStats({
-      userId,
-      categoryStats: [], // can prepopulate if needed
-    });
+    const newUser = new User({ userId, name, email });
+    await newUser.save();
 
-    await newStats.save();
-    res.status(201).json(newStats);
+    res.status(201).json(newUser);
   } catch (err) {
-    res.status(500).json({ error: "Failed to register user" });
+    console.error("Error saving user:", err);
+    res.status(500).json({ message: "Failed to register user" });
   }
 });
+
+
 
 export default router;
