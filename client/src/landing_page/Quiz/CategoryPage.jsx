@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import QuizCard from "../../components/QuizCard";
 import Countdown from "../../components/Countdown";
@@ -11,15 +11,13 @@ const CategoryPage = () => {
   const [rateLimitTimeLeft, setRateLimitTimeLeft] = useState(null);
   const { isLoaded, isSignedIn, user } = useUser();
 
-  const navigate = useNavigate();
   useEffect(() => {
     if (!isLoaded || !isSignedIn || !user) return;
     const fetchQuizzes = async () => {
-        // setLoading(true);
       try {
         const res = await axios.get(`/api/categories/${categoryId}/quizzes`, {
           headers: {
-            "x-user-id": user.id, // backend can use this for rate limiting
+            "x-user-id": user.id, 
           },
         });
         console.log(res.data, "data of quiz");

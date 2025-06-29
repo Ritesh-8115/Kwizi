@@ -16,8 +16,9 @@ import QuizPage from "./landing_page/Quiz/QuizPage";
 import QuizSetupPage from "./landing_page/Quiz/QuizSetup";
 import CategoryPage from "./landing_page/Quiz/CategoryPage";
 import useRegisterUser from "./hooks/useRegisterUser";
-function App() {
+import QuizResult from "./landing_page/Quiz/QuizResult";
 
+function App() {
   useRegisterUser()
   return (
     <>
@@ -31,7 +32,8 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/categories/:categoryId" element={<CategoryPage />} />
-        <Route path="/quiz/setup" element={<QuizSetupPage />} />
+        <Route path="/quiz/setup/:id" element={<QuizSetupPage />} />
+        <Route path="/results" element={<QuizResult />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/privacyPolicy" element={<PrivacyPolicy />} />

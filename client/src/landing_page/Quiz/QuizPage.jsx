@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { useGlobalContext } from "../../context/globalContext";
-// import { IOption, IQuestion, IResponse } from "../config/index";
 import { flag, next } from "../../utils/Icons";
-import toast from "react-hot-toast";
 import axios from "axios";
+import { useUser } from "@clerk/clerk-react";
 
-const QuizPage = () => {
+function QuizPage() {
+  const { user } = useUser();
   const {
     selectedQuiz,
     quizSetup,
@@ -81,53 +81,66 @@ const QuizPage = () => {
       setCurrentIndex((prev) => prev + 1);
       setActiveQuestion(null);
     } else {
-      navigate("/results");
+      handleFinishQuiz();
     }
   };
 
   const handleFinishQuiz = async () => {
-    setQuizResponses(responses);
+    const fullResponses = shuffledQuestions.map((question) => {
+      const answered = responses.find((r) => r.questionId === question.id);
+      return (
+        answered || {
+          questionId: question.id,
+          optionId: null,
+          isCorrect: false,
+        }
+      );
+    });
 
-    const score = responses.filter((res) => res.isCorrect).length;
+    const score = fullResponses.filter((res) => res.isCorrect).length;
 
     try {
       await axios.post("/api/user/quiz/finish", {
+        userId: user?.id,
         categoryId: selectedQuiz.categoryId,
-        quizId: selectedQuiz.id,
+        quizId: selectedQuiz._id,
         score,
-        responses,
+        correctAnswers: score,
+        totalQuestions: fullResponses.length,
+        responses: fullResponses,
       });
+
+      setQuizResponses(fullResponses);
+      setQuizSetup({ questionCount: 1, category: null, difficulty: null });
+      navigate("/results");
     } catch (error) {
       console.error("Error submitting quiz:", error);
     }
-
-    setQuizSetup({ questionCount: 1, category: null, difficulty: null });
-    navigate("/results");
   };
 
   if (!selectedQuiz) return null;
 
   return (
-    <div className="py-[2.5rem]">
+    <div className="pmax-w-xl mx-auto mt-[2rem] ml-[14%] mr-[14%]  p-6 border-1 rounded-xl shadow">
       {shuffledQuestions[currentIndex] ? (
         <div className="space-y-6">
-          <div className="flex flex-col gap-6">
-            <p className="py-3 px-6 border-2 text-xl font-bold self-end rounded-lg shadow">
+          <div className="flex flex-col gap-2 textAlign-center">
+            <p className="py-3 px-2 border-1 text-xl self-start rounded-lg shadow">
               Question: {currentIndex + 1} /{" "}
-              <span className="text-3xl">{shuffledQuestions.length}</span>
+              <span className="text-xl">{shuffledQuestions.length}</span>
             </p>
-            <h1 className="mt-4 px-10 text-5xl font-bold text-center">
+            <h1 className="mt-2 px-2 text-2xl font-bold">
               {shuffledQuestions[currentIndex].text}
             </h1>
           </div>
 
-          <div className="pt-14 space-y-4">
+          <div className="pt-5 space-y-4">
             {shuffledOptions.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleActiveQuestion(option)}
-                className={`relative group py-3 w-full text-center border-2 text-lg font-semibold rounded-lg
-                  hover:bg-[rgba(0,0,0,0.03)] transition-all duration-200 ease-in-out
+                className={`relative group py-3 w-full text-center border-1 text-lg font-semibold rounded-lg
+                  hover:bg-[rgba(0,0,0,0.05)] transition-all duration-200 ease-in-out
                   ${
                     option.text === activeQuestion?.text
                       ? "bg-green-100 border-green-500 shadow hover:border-green-500"
@@ -143,17 +156,11 @@ const QuizPage = () => {
         <p className="text-lg">No questions found for this quiz</p>
       )}
 
-      <div className="w-full py-[4rem] fixed bottom-0 left-0 border-t-2 flex items-center justify-center">
+      <div className="w-full py-5 mt-5 flex items-center justify-center bg-white">
         <Button
-          className="px-10 py-6 font-bold text-white text-xl rounded-xl"
+          className="px-10 py-6 cursor-pointer font-bold border-1 text-black text-xl rounded-xl hover:bg-sky-50"
           variant={"green"}
           onClick={() => {
-            if (!activeQuestion?.id) {
-              new Audio("/sounds/error.mp3").play();
-              toast.error("Please select an option to continue");
-              return;
-            }
-
             if (currentIndex < shuffledQuestions.length - 1) {
               handleNextQuestion();
             } else {
@@ -170,6 +177,6 @@ const QuizPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default QuizPage;
