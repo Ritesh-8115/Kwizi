@@ -1,6 +1,5 @@
 import React from "react";
-import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, Rectangle, XAxis } from "recharts";
+import { Bar, BarChart, Rectangle, XAxis } from "recharts";
 import { formatTime } from "../../utils/formatTime";
 
 import {
@@ -23,12 +22,12 @@ function CategoryBarChart({ categoryData }) {
     {
       key: "attempts",
       value: categoryData.attempts,
-      fill: "#60a5fa", // var(--blue-400)
+      fill: "#60a5fa",
     },
     {
       key: "completed",
       value: categoryData.completed,
-      fill: "#4ade80", // var(--green-400)
+      fill: "#4ade80", 
     },
   ];
 

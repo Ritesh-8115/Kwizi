@@ -1,4 +1,3 @@
-// src/components/Countdown.tsx
 import React, { useEffect } from "react";
 
 function Countdown({ intitialTimeLeft }) {

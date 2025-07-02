@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Loader from "./Loader";
 import { useUser } from "@clerk/clerk-react";
 import { formatTime } from "../../utils/formatTime";
 import CategoryBarChart from "./CategoryBarChart";
