@@ -19,7 +19,14 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: (origin, callback) => {
+      const allowedOrigins = [process.env.CLIENT_URL];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     allowedHeaders: [
       "x-user-id",
       "Content-Type",
