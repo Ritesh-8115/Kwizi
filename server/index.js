@@ -22,6 +22,8 @@ app.use(
     origin: process.env.CLIENT_URL,
     allowedHeaders: [
       "x-user-id",
+      "Content-Type",
+      "Authorization",
     ],
     credentials: true,
   })
