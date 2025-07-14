@@ -32,7 +32,11 @@ app.use("/api/categories", categoriesRoutes);
 app.use("/api/categories", quizRoutes);
 app.use("/api", userStatsRoutes);
 app.use("/api", clerkWebhook);
-app.use(ClerkExpressWithAuth());
+app.use(
+  ClerkExpressWithAuth({
+    secretKey: process.env.CLERK_SECRET_KEY,
+  })
+);
 app.use("/api", protectedRoutes);
 
 
