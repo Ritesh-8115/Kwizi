@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 
 dotenv.config();
-import express from "express"
-import cors from "cors"
+import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import userStatsRoutes from "./routes/userStatsRoutes.js";
 import userRoutes from "./routes/user.js";
@@ -13,14 +13,23 @@ import protectedRoutes from "./routes/protected.js";
 import quizRoutes from "./routes/quiz.js";
 import userQuizRoutes from "./routes/userQuizRoutes.js";
 
-
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(cors({
-  origin: process.env.CLIENT_BASE_URL,
-}
-));
+app.use(
+  cors({
+    origin: process.env.CLIENT_BASE_URL,
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Cache-Control",
+      "Expires",
+      "Pragma",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // MongoDB connection
@@ -28,7 +37,6 @@ mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log(error));
-
 
 app.use("/api/user", userRoutes);
 app.use("/api/user", userQuizRoutes);
@@ -43,9 +51,4 @@ app.use(
 );
 app.use("/api", protectedRoutes);
 
-
-
-
-
 app.listen(5000, () => console.log(`Server is now running on port ${PORT}`));
-
