@@ -8,7 +8,7 @@ const useCategories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/categories`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/categories`);
         setCategories(res.data);
         return res.data;
       } catch (err) {

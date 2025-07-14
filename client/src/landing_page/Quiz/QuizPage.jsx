@@ -100,7 +100,7 @@ function QuizPage() {
     const score = fullResponses.filter((res) => res.isCorrect).length;
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/user/quiz/finish`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/user/quiz/finish`, {
         userId: user?.id,
         categoryId: selectedQuiz.categoryId,
         quizId: selectedQuiz._id,
