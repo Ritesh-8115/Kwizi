@@ -8,7 +8,7 @@ function InitUserStats() {
   useEffect(() => {
     const registerUser = async () => {
       try {
-        await axios.post(`/api/user/register`, {
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/user/register`, {
           userId: user.id,
           name: user.fullName,
           email: user.primaryEmailAddress.emailAddress,
