@@ -16,17 +16,12 @@ import userQuizRoutes from "./routes/userQuizRoutes.js";
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+const allowedOrigins = [
+  "https://kwizi-1.onrender.com", 
+];
 app.use(
   cors({
-    origin: process.env.CLIENT_BASE_URL,
-    methods: ["GET", "POST", "DELETE", "PUT"],
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Cache-Control",
-      "Expires",
-      "Pragma",
-    ],
+    origin: allowedOrigins,
     credentials: true,
   })
 );
