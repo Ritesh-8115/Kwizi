@@ -29,6 +29,7 @@ app.use(
     },
     allowedHeaders: [
       "x-user-id",
+      "Access-Control-Allow-Origin",
       "Content-Type",
       "Authorization",
     ],
