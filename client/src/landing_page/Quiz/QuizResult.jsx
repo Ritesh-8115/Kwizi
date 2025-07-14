@@ -13,7 +13,7 @@ function QuizResult() {
   useEffect(() => {
     async function fetchResult() {
       try {
-        const res = await axios.get(`/api/user/quiz/latest/${user.id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/user/quiz/latest/${user.id}`);
         setResult(res.data);
       } catch (error) {
         console.error("Failed to fetch quiz result", error);

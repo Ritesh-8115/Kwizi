@@ -81,7 +81,7 @@ const QuizSetupPage = () => {
 
     if (selectedQuestions.length > 0) {
       try {
-        await axios.post("/api/user/quiz/start", {
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/user/quiz/start`, {
           categoryId: selectedQuiz?.categoryId,
           quizId: selectedQuiz?._id,
         });

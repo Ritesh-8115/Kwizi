@@ -15,7 +15,7 @@ const CategoryPage = () => {
     if (!isLoaded || !isSignedIn || !user) return;
     const fetchQuizzes = async () => {
       try {
-        const res = await axios.get(`/api/categories/${categoryId}/quizzes`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/categories/${categoryId}/quizzes`, {
           headers: {
             "x-user-id": user.id, 
           },
