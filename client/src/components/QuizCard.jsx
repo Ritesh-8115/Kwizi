@@ -10,7 +10,7 @@ function QuizCard({ quiz }) {
   const handleClick = () => {
     setSelectedQuiz(quiz);
     localStorage.setItem("selectedQuiz", JSON.stringify(quiz));
-    navigate(`/quiz/setup/${quiz._id}`);
+    navigate(`${import.meta.env.VITE_API_BASE_URL}/quiz/setup/${quiz._id}`);
   };
 
   return (

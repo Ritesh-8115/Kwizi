@@ -23,7 +23,7 @@ export const GlobalContextProvider = ({ children }) => {
     const registerUser = async () => {
       if (!isLoaded || !user) return;
       try {
-        await axios.post("http://localhost:5000/api/user/register", {
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/user/register`, {
           userId: user.id,
           name: user.fullName,
           email: user.primaryEmailAddress.emailAddress,
