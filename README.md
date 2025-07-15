@@ -88,7 +88,7 @@
 </code></pre>
 <h3>Deployment</h3>
 <p>Live Deployment:</p>
-<pre><code class="language-sh">site link
+<pre><code class="language-sh">https://kwizi-app-1.onrender.com
 </code></pre>
 <h3>ScreenShots:</h3>
 <p>Home Page:</p>
